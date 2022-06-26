@@ -44,14 +44,16 @@ public enum AttributeConst {
     DEL_FLAG_TRUE(1),
     DEL_FLAG_FALSE(0),
 
-    //日報管理
+  //日報管理
     REPORT("report"),
     REPORTS("reports"),
     REP_COUNT("reports_count"),
     REP_ID("id"),
     REP_DATE("report_date"),
     REP_TITLE("title"),
-    REP_CONTENT("content");
+    REP_CONTENT("content"),
+    REP_IN_TIME("in_time"),
+    REP_OUT_TIME("out_time");
 
     private final String text;
     private final Integer i;

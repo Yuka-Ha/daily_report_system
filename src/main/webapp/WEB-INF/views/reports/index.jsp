@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="constants.ForwardConst" %>
+<%@ page import="constants.AttributeConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
@@ -23,6 +24,9 @@
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
+                    <th class="report_report_in_time">出勤時刻</th>
+                    <th class="report_report_out_time">退勤時刻</th>
+
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
@@ -32,6 +36,10 @@
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
                         <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
+                        <td class="report_in_time"><fmt:parseDate value="${report.inTime}" pattern="yyyy-MM-dd'T'HH:mm" var="inTime" type="date" />
+                          <fmt:formatDate value="${inTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                        <td class="report_out_time"><fmt:parseDate value="${report.outTime}" pattern="yyyy-MM-dd'T'HH:mm" var="outTime" type="date" />
+                          <fmt:formatDate value="${outTime}" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
             </tbody>

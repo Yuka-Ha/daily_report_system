@@ -23,6 +23,10 @@
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
                     <td><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                 </tr>
+                 <tr>
+                    <th>タイトル</th>
+                    <td><pre><c:out value="${report.title}" /></pre></td>
+                </tr>
                 <tr>
                     <th>内容</th>
                     <td><pre><c:out value="${report.content}" /></pre></td>
@@ -36,6 +40,16 @@
                     <th>更新日時</th>
                     <fmt:parseDate value="${report.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
                     <td><fmt:formatDate value="${updateDay}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                </tr>
+                <tr>
+                    <th>出勤時刻</th>
+                    <fmt:parseDate value="${report.inTime}" pattern="yyyy-MM-dd'T'HH:mm" var="inTime" type="date" />
+                      <td><fmt:formatDate value="${inTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                </tr>
+                <tr>
+                    <th>退勤時刻</th>
+                    <fmt:parseDate value="${report.outTime}" pattern="yyyy-MM-dd'T'HH:mm" var="outTime" type="date" />
+                    <td><fmt:formatDate value="${outTime}" pattern="yyyy-MM-dd HH:mm"/></td>
                 </tr>
             </tbody>
         </table>

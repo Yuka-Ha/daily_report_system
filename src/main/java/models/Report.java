@@ -93,5 +93,16 @@ public class Report {
      */
     @Column(name = JpaConst.REP_COL_UPDATED_AT, nullable = false)
     private LocalDateTime updatedAt;
+    /**
+     * 出勤
+     */
+    @Column(name = JpaConst.REP_COL_IN_TIME, nullable = false)
+    private LocalDateTime inTime;
+
+    /**
+     * 退勤
+     */
+    @Column(name = JpaConst.REP_COL_OUT_TIME, nullable = false)
+    private LocalDateTime outTime;
 
 }

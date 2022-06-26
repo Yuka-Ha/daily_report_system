@@ -2,6 +2,8 @@ package actions;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -104,6 +106,15 @@ public class ReportAction extends ActionBase {
             //セッションからログイン中の従業員情報を取得
             EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
+            //出退勤時刻入力のための宣言
+            String strDateTimeIN = getRequestParam(AttributeConst.REP_IN_TIME);
+            DateTimeFormatter formatterIN = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime inTime = LocalDateTime.parse(strDateTimeIN, formatterIN);
+
+            String strDateTimeOUT = getRequestParam(AttributeConst.REP_OUT_TIME);
+            DateTimeFormatter formatterOUT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime outTime = LocalDateTime.parse(strDateTimeOUT, formatterOUT);
+
             //パラメータの値をもとに日報情報のインスタンスを作成する
             ReportView rv = new ReportView(
                     null,
@@ -112,7 +123,9 @@ public class ReportAction extends ActionBase {
                     getRequestParam(AttributeConst.REP_TITLE),
                     getRequestParam(AttributeConst.REP_CONTENT),
                     null,
-                    null);
+                    null,
+                    inTime,
+                    outTime);
 
             //日報情報登録
             List<String> errors = service.create(rv);
@@ -201,10 +214,27 @@ public void update() throws ServletException, IOException {
         //idを条件に日報データを取得する
         ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
+
+        //出退勤時刻入力のための宣言
+        String strDateTimeIN = getRequestParam(AttributeConst.REP_IN_TIME);
+        DateTimeFormatter formatterIN = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime inTime = LocalDateTime.parse(strDateTimeIN, formatterIN);
+
+        String strDateTimeOUT = getRequestParam(AttributeConst.REP_OUT_TIME);
+        DateTimeFormatter formatterOUT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime outTime = LocalDateTime.parse(strDateTimeOUT, formatterOUT);
+
+
+
+
+
         //入力された日報内容を設定する
         rv.setReportDate(toLocalDate(getRequestParam(AttributeConst.REP_DATE)));
         rv.setTitle(getRequestParam(AttributeConst.REP_TITLE));
         rv.setContent(getRequestParam(AttributeConst.REP_CONTENT));
+        rv.setInTime(inTime);
+        rv.setOutTime(outTime);
+
 
         //日報データを更新する
         List<String> errors = service.update(rv);
