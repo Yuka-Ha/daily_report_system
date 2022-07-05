@@ -1,8 +1,5 @@
 package constants;
 
-
-
-
 /**
  * 画面の項目値等を定義するEnumクラス
  *
@@ -44,7 +41,7 @@ public enum AttributeConst {
     DEL_FLAG_TRUE(1),
     DEL_FLAG_FALSE(0),
 
-  //日報管理
+    //日報管理
     REPORT("report"),
     REPORTS("reports"),
     REP_COUNT("reports_count"),

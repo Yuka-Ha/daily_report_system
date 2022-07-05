@@ -2,10 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst" %>
+<%@ page import="constants.AttributeConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
+<c:set var="reaction" value="${ForwardConst.ACT_REA.getValue()}" />
+<c:set var="commRea" value="${ForwardConst.CMD_REACTION.getValue()}" />
+
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -60,8 +64,14 @@
             </p>
         </c:if>
 
+        <br>
+        <form method="POST" action="<c:url value='?action=${reaction}&command=${commRea}' />">
+        <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
+        <button type="submit">いいね！</button>
+        </form>
+
         <p>
-            <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
+         <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

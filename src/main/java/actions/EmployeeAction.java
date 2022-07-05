@@ -31,7 +31,6 @@ public class EmployeeAction extends ActionBase {
 
         //メソッドを実行
         invoke();
-
         service.close();
     }
 

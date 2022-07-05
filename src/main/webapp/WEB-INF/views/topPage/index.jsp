@@ -27,7 +27,7 @@
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
-                     <th class="report_in_time">出勤時刻</th>
+                    <th class="report_in_time">出勤時刻</th>
                     <th class="report_out_time">退勤時刻</th>
 
                 </tr>

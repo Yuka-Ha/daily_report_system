@@ -42,9 +42,18 @@ public interface JpaConst {
     String REP_COL_IN_TIME = "in_time"; //出勤
     String REP_COL_OUT_TIME = "out_time"; //退勤
 
+    //リアクションテーブル
+    String TABLE_REA = "reaction"; //テーブル名
+
+    String REA_COL_ID = "id"; //id
+    String REA_COL_EMP = "employee_id"; //リアクションした従業員のid
+    String REA_COL_REP = "report_id"; //日報のid
+
+
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
+    String ENTITY_REA = "reaction"; //リアクション
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //社員番号
@@ -76,5 +85,5 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
-
+    //String Q_REA_COUNT = "SELECT COUNT(r) FROM Reaction AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 }
