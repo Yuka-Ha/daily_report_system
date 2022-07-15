@@ -18,7 +18,7 @@ public class ReactionConverter {
      */
     public static Reaction toModel(ReactionView rev) {
         return new Reaction(
-                null,
+                rev.getId(),
                 EmployeeConverter.toModel(rev.getEmployee()),
                 ReportConverter.toModel(rev.getReport()));
     }
@@ -35,7 +35,7 @@ public class ReactionConverter {
         }
 
         return new ReactionView(
-                null,
+                re.getId(),
                 EmployeeConverter.toView(re.getEmployee()),
                 ReportConverter.toView(re.getReport()));
     }

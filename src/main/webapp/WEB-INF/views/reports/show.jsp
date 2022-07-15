@@ -1,14 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="constants.ForwardConst" %>
-<%@ page import="constants.AttributeConst" %>
+<%@ page import="constants.ForwardConst"%>
+<%@ page import="constants.AttributeConst"%>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
 <c:set var="reaction" value="${ForwardConst.ACT_REA.getValue()}" />
 <c:set var="commRea" value="${ForwardConst.CMD_REACTION.getValue()}" />
+<c:set var="commCancel" value="${ForwardConst.CMD_CANCEL.getValue()}" />
 
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -27,13 +29,13 @@
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
                     <td><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                 </tr>
-                 <tr>
+                <tr>
                     <th>タイトル</th>
                     <td><pre><c:out value="${report.title}" /></pre></td>
                 </tr>
                 <tr>
                     <th>内容</th>
-                    <td><pre><c:out value="${report.content}" /></pre></td>
+                    <td><pre> <c:out value="${report.content}" /></pre></td>
                 </tr>
                 <tr>
                     <th>登録日時</th>
@@ -48,30 +50,40 @@
                 <tr>
                     <th>出勤時刻</th>
                     <fmt:parseDate value="${report.inTime}" pattern="yyyy-MM-dd'T'HH:mm" var="inTime" type="date" />
-                      <td><fmt:formatDate value="${inTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                    <td><fmt:formatDate value="${inTime}" pattern="yyyy-MM-dd HH:mm" /></td>
                 </tr>
                 <tr>
                     <th>退勤時刻</th>
                     <fmt:parseDate value="${report.outTime}" pattern="yyyy-MM-dd'T'HH:mm" var="outTime" type="date" />
-                    <td><fmt:formatDate value="${outTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                    <td><fmt:formatDate value="${outTime}" pattern="yyyy-MM-dd HH:mm" /></td>
                 </tr>
             </tbody>
         </table>
 
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>
-                <a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
+                <a
+                    href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
             </p>
         </c:if>
-
         <br>
-        <form method="POST" action="<c:url value='?action=${reaction}&command=${commRea}' />">
-        <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
-        <button type="submit">いいね！</button>
-        </form>
+
+        <c:if test="${isReaction == true}">
+            <form method="POST" action="<c:url value='?action=${reaction}&command=${commCancel}' />">
+                <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
+                <button type="submit">取り消し！</button>
+            </form>
+        </c:if>
+
+        <c:if test="${isReaction == false}">
+            <form method="POST" action="<c:url value='?action=${reaction}&command=${commRea}' />">
+                <input type="hidden" name="${AttributeConst.REP_ID.getValue()}"value="${report.id}" />
+                <button type="submit">いいね！</button>
+            </form>
+        </c:if>
 
         <p>
-         <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
+            <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

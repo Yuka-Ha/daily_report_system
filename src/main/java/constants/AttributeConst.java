@@ -50,7 +50,12 @@ public enum AttributeConst {
     REP_TITLE("title"),
     REP_CONTENT("content"),
     REP_IN_TIME("in_time"),
-    REP_OUT_TIME("out_time");
+    REP_OUT_TIME("out_time"),
+
+    ISREACTION("isReaction"),
+    CANCEL("cancel");
+
+
 
     private final String text;
     private final Integer i;

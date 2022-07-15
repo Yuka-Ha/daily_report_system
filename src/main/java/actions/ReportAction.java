@@ -14,6 +14,7 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.ReactionService;
 import services.ReportService;
 
 /**
@@ -23,6 +24,7 @@ import services.ReportService;
 public class ReportAction extends ActionBase {
 
     private ReportService service;
+    private ReactionService reactionService;
 
     /**
      * メソッドを実行する
@@ -31,10 +33,12 @@ public class ReportAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         service = new ReportService();
+        reactionService = new ReactionService();
 
         //メソッドを実行
         invoke();
         service.close();
+        reactionService.close();
     }
 
     /**
@@ -160,6 +164,8 @@ public class ReportAction extends ActionBase {
 
         //idを条件に日報データを取得する
         ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
 
         if (rv == null) {
             //該当の日報データが存在しない場合はエラー画面を表示
@@ -167,7 +173,10 @@ public class ReportAction extends ActionBase {
 
         } else {
 
+            boolean isReaction = reactionService.countReaction(ev,rv);
+
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+            putRequestScope(AttributeConst.ISREACTION, isReaction); //取得した日報データ
 
             //詳細画面を表示
             forward(ForwardConst.FW_REP_SHOW);
@@ -223,10 +232,6 @@ public void update() throws ServletException, IOException {
         String strDateTimeOUT = getRequestParam(AttributeConst.REP_OUT_TIME);
         DateTimeFormatter formatterOUT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime outTime = LocalDateTime.parse(strDateTimeOUT, formatterOUT);
-
-
-
-
 
         //入力された日報内容を設定する
         rv.setReportDate(toLocalDate(getRequestParam(AttributeConst.REP_DATE)));
