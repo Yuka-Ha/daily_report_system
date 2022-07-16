@@ -63,5 +63,4 @@ public class ReportView {
      */
     private LocalDateTime outTime;
 
-
-    }
+}

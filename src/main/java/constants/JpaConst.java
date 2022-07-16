@@ -91,6 +91,6 @@ public interface JpaConst {
     String Q_REA_COUNT = ENTITY_REA + ".count";
     String Q_REA_COUNT_DEF = "SELECT COUNT(r) FROM Reaction AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE+" AND r.report = :" + JPQL_PARM_REPORT;
 
-    String Q_REA_DATE = ENTITY_REA + ".date";
-    String Q_REA_DATE_DEF = "SELECT r FROM Reaction AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE+" AND r.report = :" + JPQL_PARM_REPORT;
+    String Q_REA_DATA = ENTITY_REA + ".date";
+    String Q_REA_DATA_DEF = "SELECT r FROM Reaction AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE+" AND r.report = :" + JPQL_PARM_REPORT;
 }

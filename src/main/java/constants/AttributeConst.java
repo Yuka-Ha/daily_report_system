@@ -56,7 +56,6 @@ public enum AttributeConst {
     CANCEL("cancel");
 
 
-
     private final String text;
     private final Integer i;
 

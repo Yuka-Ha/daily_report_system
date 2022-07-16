@@ -120,8 +120,6 @@ public class ReportService extends ServiceBase {
         return errors;
     }
 
-
-
     /**
      * idを条件にデータを1件取得する
      * @param id

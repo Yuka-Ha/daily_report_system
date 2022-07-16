@@ -15,24 +15,26 @@
 
     </div>
 </c:if>
-<label for="${AttributeConst.EMP_CODE.getValue()}">社員番号</label><br />
-<input type="text" name="${AttributeConst.EMP_CODE.getValue()}" value="${employee.code}" />
-<br /><br />
 
-<label for="${AttributeConst.EMP_NAME.getValue()}">氏名</label><br />
-<input type="text" name="${AttributeConst.EMP_NAME.getValue()}" value="${employee.name}" />
-<br /><br />
+  <label for="${AttributeConst.EMP_CODE.getValue()}">社員番号</label><br />
+    <input type="text" name="${AttributeConst.EMP_CODE.getValue()}" value="${employee.code}" />
+  <br /><br />
 
-<label for="${AttributeConst.EMP_PASS.getValue()}">パスワード</label><br />
-<input type="password" name="${AttributeConst.EMP_PASS.getValue()}" />
-<br /><br />
+  <label for="${AttributeConst.EMP_NAME.getValue()}">氏名</label><br />
+    <input type="text" name="${AttributeConst.EMP_NAME.getValue()}" value="${employee.name}" />
+  <br /><br />
 
-<label for="${AttributeConst.EMP_ADMIN_FLG.getValue()}">権限</label><br />
-<select name="${AttributeConst.EMP_ADMIN_FLG.getValue()}">
-    <option value="${AttributeConst.ROLE_GENERAL.getIntegerValue()}"<c:if test="${employee.adminFlag == AttributeConst.ROLE_GENERAL.getIntegerValue()}"> selected</c:if>>一般</option>
-    <option value="${AttributeConst.ROLE_ADMIN.getIntegerValue()}"<c:if test="${employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}"> selected</c:if>>管理者</option>
-</select>
-<br /><br />
-<input type="hidden" name="${AttributeConst.EMP_ID.getValue()}" value="${employee.id}" />
-<input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
-<button type="submit">投稿</button>
+  <label for="${AttributeConst.EMP_PASS.getValue()}">パスワード</label><br />
+    <input type="password" name="${AttributeConst.EMP_PASS.getValue()}" />
+  <br /><br />
+
+  <label for="${AttributeConst.EMP_ADMIN_FLG.getValue()}">権限</label><br />
+    <select name="${AttributeConst.EMP_ADMIN_FLG.getValue()}">
+      <option value="${AttributeConst.ROLE_GENERAL.getIntegerValue()}"<c:if test="${employee.adminFlag == AttributeConst.ROLE_GENERAL.getIntegerValue()}"> selected</c:if>>一般</option>
+      <option value="${AttributeConst.ROLE_ADMIN.getIntegerValue()}"<c:if test="${employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}"> selected</c:if>>管理者</option>
+    </select>
+  <br /><br />
+
+  <input type="hidden" name="${AttributeConst.EMP_ID.getValue()}" value="${employee.id}" />
+  <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
+  <button type="submit">投稿</button>

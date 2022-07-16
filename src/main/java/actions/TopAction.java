@@ -9,8 +9,8 @@ import actions.views.EmployeeView; //追記
 import actions.views.ReportView; //追記
 import constants.AttributeConst;
 import constants.ForwardConst;
-import constants.JpaConst;  //追記
-import services.ReportService;  //追記
+import constants.JpaConst; //追記
+import services.ReportService; //追記
 
 /**
  * トップページに関する処理を行うActionクラス
@@ -55,8 +55,6 @@ public class TopAction extends ActionBase {
         putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //ログイン中の従業員が作成した日報の数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
-
-        //↑ここまで追記
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);

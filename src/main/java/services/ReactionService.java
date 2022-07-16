@@ -58,15 +58,13 @@ public class ReactionService extends ServiceBase {
     }
 
     public List<Reaction> getReaction(EmployeeView employee, ReportView report) {
-      //DATA
-              List<Reaction> list = em.createNamedQuery(JpaConst.Q_REA_DATE, Reaction.class)
-                      .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
-                      .setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
-                      .getResultList();
-         return list;
-          }
 
-
+        List<Reaction> list = em.createNamedQuery(JpaConst.Q_REA_DATA, Reaction.class)
+                .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
+                .setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
+                .getResultList();
+        return list;
+    }
 
     /**
      * リアクションデータを1件削除する
@@ -77,7 +75,7 @@ public class ReactionService extends ServiceBase {
 
         em.getTransaction().begin();
         Reaction r = findOneInternal(rev.getId());
-        em.remove(r);       // データ削除
+        em.remove(r); // データ削除
         em.getTransaction().commit();
 
     }
@@ -85,6 +83,7 @@ public class ReactionService extends ServiceBase {
     public ReactionView findOne(int id) {
         return ReactionConverter.toView(findOneInternal(id));
     }
+
     /**
      * idを条件にデータを1件取得する
      * @param id

@@ -27,8 +27,8 @@ import lombok.Setter;
             name = JpaConst.Q_REA_COUNT,
             query = JpaConst.Q_REA_COUNT_DEF),
     @NamedQuery(
-            name = JpaConst.Q_REA_DATE,
-            query = JpaConst.Q_REA_DATE_DEF),
+            name = JpaConst.Q_REA_DATA,
+            query = JpaConst.Q_REA_DATA_DEF),
 })
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
 @Setter //全てのクラスフィールドについてsetterを自動生成する(Lombok)
@@ -46,7 +46,7 @@ public class Reaction {
     private Integer id;
 
     /**
-     * リアクションを従業員
+     * ログインしている従業員
      */
     @ManyToOne
     @JoinColumn(name = JpaConst.REA_COL_EMP, nullable = false)

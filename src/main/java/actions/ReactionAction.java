@@ -46,7 +46,7 @@ public class ReactionAction extends ActionBase {
      */
     public void reaction() throws ServletException, IOException {
 
-        System.out.println("成功!!");
+        System.out.println("成功!!");  //デバックとして表示
 
         //ログインしている従業員を取得する
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
@@ -60,17 +60,16 @@ public class ReactionAction extends ActionBase {
                 ev,
                 rv);
 
-        //日報情報登録
-         reactionService.create(rev);
-         System.out.println("登録成功!!");
+        //リアクション登録
+        reactionService.create(rev);
+        System.out.println("登録成功!!");   //デバックとして表示
 
-         //詳細ページに戻る
-         putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+        //詳細ページに戻る
+        putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
-         //詳細画面を表示
-         forward(ForwardConst.FW_REP_SHOW);
+        //詳細画面を表示
+        forward(ForwardConst.FW_REP_SHOW);
     }
-
 
     /**
      * リアクション-いいね！をキャンセルする
@@ -79,7 +78,7 @@ public class ReactionAction extends ActionBase {
      */
     public void cancel() throws ServletException, IOException {
 
-        System.out.println("成功!!");
+        System.out.println("成功!!");  //デバックとして表示
 
         //ログインしている従業員を取得する
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
@@ -87,7 +86,8 @@ public class ReactionAction extends ActionBase {
         //idを条件に日報データを取得する
         ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
-        System.out.println(rv.getId());
+        System.out.println(rv.getId());  //デバックとして表示
+
         //パラメータの値をもとに日報情報のインスタンスを作成する
         List<Reaction> list = reactionService.getReaction(ev, rv);
 
@@ -95,50 +95,14 @@ public class ReactionAction extends ActionBase {
             System.out.println(r.getId());
             ReactionView rev = reactionService.findOne(r.getId());
             reactionService.cancel(rev);
-            System.out.println("削除成功!!");
+            System.out.println("削除成功!!");  //デバックとして表示
 
         }
 
-        //日報情報登録
+        //詳細ページに戻る
+        putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
-         //詳細ページに戻る
-         putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
-
-         //詳細画面を表示
-         forward(ForwardConst.FW_REP_SHOW);
+        //詳細画面を表示
+        forward(ForwardConst.FW_REP_SHOW);
     }
-    /**
-     * 一覧画面を表示する
-     * @throws ServletException
-     * @throws IOException
-     */
-    /*  public void isReaction() throws ServletException, IOException {
-
-        //対象の日報データを取得
-        boolean isReaction = reactionService.countReaction();
-
-        putRequestScope(AttributeConst.Reaction, reaction); //取得した日報データ
-        putRequestScope(AttributeConst.REP_COUNT, reportsCount); //全ての日報データの件数
-        putRequestScope(AttributeConst.PAGE, page); //ページ数
-        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
-
-        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
-        String flush = getSessionScope(AttributeConst.FLUSH);
-        if (flush != null) {
-            putRequestScope(AttributeConst.FLUSH, flush);
-            removeSessionScope(AttributeConst.FLUSH);
-        }
-
-        //一覧画面を表示
-        forward(ForwardConst.FW_REP_INDEX);
-    }
-
-    */
-
-
-
-
-
-
-
 }

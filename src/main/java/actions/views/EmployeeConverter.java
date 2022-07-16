@@ -46,7 +46,7 @@ public class EmployeeConverter {
      */
     public static EmployeeView toView(Employee e) {
 
-        if(e == null) {
+        if (e == null) {
             return null;
         }
 

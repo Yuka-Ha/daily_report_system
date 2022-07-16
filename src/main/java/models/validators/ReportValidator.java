@@ -53,7 +53,6 @@ public class ReportValidator {
         return errors;
     }
 
-
     /**
      * タイトルに入力値があるかをチェックし、入力値がなければエラーメッセージを返却
      * @param title タイトル
@@ -109,7 +108,7 @@ public class ReportValidator {
 
     // //出勤時間と退勤時間が逆転していたら、エラー
     private static String validateInOut(LocalDateTime inTime, LocalDateTime outTime) {
-        if (inTime . isAfter(outTime)) {
+        if (inTime.isAfter(outTime)) {
             return MessageConst.E_INOUT.getMessage();
         }
 
